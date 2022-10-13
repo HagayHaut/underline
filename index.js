@@ -2,7 +2,7 @@
 underline prototype definition 
 */
 
-class _ {
+class Underline {
     constructor() {}
 
     /*    
@@ -12,6 +12,18 @@ class _ {
     /*    
     NON-DESTRUCTIVE 
     */
+
+    /*
+    Input: array, integer -> index, can be negative
+    Output: item at index. If index is negative, count from end of array
+    */
+
+    at(array, index) {
+        if (index < 0) {
+            return array[array.length + index];
+        }
+        return array[index];
+    }
 
     /*
     Input: array, integer k
@@ -58,6 +70,38 @@ class _ {
     }
 
     /*
+    Input: array, plus 1 or more values
+    Output: array with values appended to the end of the array. 
+            Array values are spread out one level
+    */
+
+    concat(array, ...vals) {
+        const result = [...array];
+        vals.forEach((v) => {
+            if (Array.isArray(v)) {
+                result.push(...v);
+            } else {
+                result.push(v);
+            }
+        });
+        return result;
+    }
+
+    /*
+    Input: array, value
+    Output: index of first occurrence of value, or -1
+    */
+
+    findIndex(array) {
+        for (let i = 0; i < array.length; i++) {
+            if (array[i]) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /*
     Input: 2 or more (n) arrays of equal length (k)
     Output: array of length n with subarrays of length k
     */
@@ -82,11 +126,20 @@ class _ {
         return result;
     }
 
-    // Destructive
+    /*
+    DESTRUCTIVE
+    */
+
+    fill(array, start, end) {}
 
     // STRING
 }
 
-const __ = new _();
+const _ = new Underline();
 
-const a = [1, 0, true, false, null, "a", NaN, __];
+const a = [1, 2, 3];
+
+console.log(_.at(a, 0));
+console.log(_.at(a, -1));
+console.log(_.at(a, -6));
+console.log(_.at(a, 3));
